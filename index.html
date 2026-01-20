@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Sellers</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&family=Source+Serif+Pro:wght@700;900&display=swap"
+    rel="stylesheet"
+  >
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['"Source Serif Pro"', 'serif'],
+            'condensed': ['"Bebas Neue"', 'sans-serif'],
+            'body': ['Poppins', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    /* Custom scrollbar styling */
+    .product-carousel::-webkit-scrollbar {
+      height: 4px;
+      transition: height 0.2s ease;
+    }
+    
+    .product-carousel::-webkit-scrollbar-track {
+      background: #ddd6d7;
+      border-radius: 10px;
+    }
+    
+    .product-carousel::-webkit-scrollbar-thumb {
+      background: #1a1a1a;
+      border-radius: 10px;
+    }
+    
+    .product-carousel:hover::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .product-carousel:active::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    /* Firefox scrollbar */
+    .product-carousel {
+      scrollbar-width: thin;
+      scrollbar-color: #231f20 #ddd6d7;
+    }
+
+    /* Product image hover transition */
+    .product-image {
+      transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover .primary-image {
+      opacity: 0;
+    }
+
+    .product-card:hover .secondary-image {
+      opacity: 1;
+    }
+
+    /* Show more animation */
+    .hidden-products {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+
+    .hidden-products.expanded {
+      max-height: 2000px;
+      transition: max-height 0.5s ease-in;
+    }
+  </style>
+</head>
+<body class="bg-white font-body">
+  <section class="px-4 pt-8 pb-10 md:px-[128px] md:pt-[80px] md:pb-[100px] max-w-[1600px] mx-auto">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-[36px]">
+      <h2 class="font-display text-[28px] md:text-[40px] font-black md:tracking-[-0.4px] tracking-[-0.28px] text-[#231f20] md:text-left text-center w-full md:w-auto">
+        Best Sellers
+      </h2>
+      <a href="#" class="hidden md:flex items-center gap-2 text-[14px] font-semibold tracking-[0.42px] text-[#5c553a] hover:text-[#231f20] whitespace-nowrap">
+        Shop All Best Sellers
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Desktop Carousel -->
+    <div class="hidden md:block">
+      <div class="product-carousel flex gap-[24px] overflow-x-auto pb-6 snap-x snap-mandatory" id="desktop-carousel">
+        <!-- Product 1 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop" 
+              alt="Headphones on yellow background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop" 
+              alt="Headphones alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              Outside Vibes T-Shirt Sunshine
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop" 
+              alt="Sunglasses on white background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop" 
+              alt="Sunglasses alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-3 right-3 bg-[#5c7962] border border-black text-[#fffffa] text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              Hike Bottle Outside Vibes Forest Green
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop" 
+              alt="Red Nike sneaker"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop" 
+              alt="Sneaker alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              Rest In Nature T-Shirt Charcoal
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=400&h=400&fit=crop" 
+              alt="Banana on pink background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop" 
+              alt="Banana alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-3 right-3 bg-[#5c7962] border border-black text-[#fffffa] text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              Outside Vibes Cap Forest Green
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+
+        <!-- Product 5 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400&h=400&fit=crop" 
+              alt="Vintage car"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&h=400&fit=crop" 
+              alt="Car alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-gray-900 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">Best Seller</span>
+          </div>
+          <h3 class="font-condensed text-xs font-bold uppercase tracking-wide text-gray-900 mb-1">Rest In Nature T-Shirt Charcoal</h3>
+          <div class="flex items-center gap-1.5 mb-1">
+            <div class="flex text-yellow-400">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-xs text-gray-500">1,234 Reviews</span>
+          </div>
+          <p class="text-base font-bold text-gray-900">$104.95</p>
+        </article>
+
+        <!-- Product 6 -->
+        <article class="product-card flex-shrink-0 w-[280px] snap-start">
+          <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop" 
+              alt="Watch on white background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop" 
+              alt="Watch alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-gray-900 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">Best Seller</span>
+            <span class="absolute top-3 right-3 bg-[#8B9A46] text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">Save 15%</span>
+          </div>
+          <h3 class="font-condensed text-xs font-bold uppercase tracking-wide text-gray-900 mb-1">Classic Watch Silver Edition</h3>
+          <div class="flex items-center gap-1.5 mb-1">
+            <div class="flex text-yellow-400">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-xs text-gray-500">1,234 Reviews</span>
+          </div>
+          <p class="text-base font-bold text-gray-900">$104.95</p>
+        </article>
+
+        <!-- Product 7 -->
+        <article class="product-card flex-shrink-0 w-[280px] snap-start">
+          <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop" 
+              alt="Camera on yellow background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop" 
+              alt="Camera alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-gray-900 text-white text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">Best Seller</span>
+          </div>
+          <h3 class="font-condensed text-xs font-bold uppercase tracking-wide text-gray-900 mb-1">Vintage Camera Polaroid Style</h3>
+          <div class="flex items-center gap-1.5 mb-1">
+            <div class="flex text-yellow-400">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-xs text-gray-500">1,234 Reviews</span>
+          </div>
+          <p class="text-base font-bold text-gray-900">$104.95</p>
+        </article>
+
+        <!-- Product 8 -->
+        <article class="product-card flex-shrink-0 w-[280px] snap-start">
+          <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop" 
+              alt="Leather bag"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop" 
+              alt="Bag alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              Leather Backpack Brown Classic
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+
+        <!-- Product 9 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=400&fit=crop" 
+              alt="Perfume bottle"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=400&fit=crop" 
+              alt="Perfume alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-3 right-3 bg-[#5c7962] border border-black text-[#fffffa] text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              Premium Fragrance Collection
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+
+        <!-- Product 10 -->
+        <article class="product-card flex-shrink-0 w-[355px] snap-start">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-5 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400&h=400&fit=crop" 
+              alt="Sneakers white"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop" 
+              alt="Sneakers alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-3 left-3 bg-white border border-black text-black text-[10px] font-condensed tracking-[0.6px] px-2 py-1 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <div class="px-3">
+            <h3 class="font-condensed text-[18px] tracking-[0.54px] text-[#1c1d1d] uppercase mb-2">
+              White Canvas Sneakers Classic
+            </h3>
+            <div class="flex items-center gap-1.5 mb-2">
+              <div class="flex text-[#231f20]">
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <svg class="w-3 h-3 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              </div>
+              <span class="text-[12px] text-[#707070]">1,234 Reviews</span>
+            </div>
+            <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Mobile Grid -->
+    <div class="md:hidden px-[24px] py-[36px] -mx-4">
+      <!-- Visible Products (First 4) -->
+      <div class="grid grid-cols-2 gap-[12px]" id="visible-products">
+        <!-- Mobile Product 1 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop" 
+              alt="Headphones on yellow background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop" 
+              alt="Headphones alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Outside Vibes T-Shirt Sunshine</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 2 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop" 
+              alt="Sunglasses on white background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop" 
+              alt="Sunglasses alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-2 right-2 bg-[#5c7962] border border-black text-[#fffffa] text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Hike Bottle Outside Vibes</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 3 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop" 
+              alt="Red Nike sneaker"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop" 
+              alt="Sneaker alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-2 right-2 bg-[#5c7962] border border-black text-[#fffffa] text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Rest In Nature T-Shirt Charcoal</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 4 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1481349518771-20055b2a7b24?w=400&h=400&fit=crop" 
+              alt="Banana on pink background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400&h=400&fit=crop" 
+              alt="Banana alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Outside Vibes Cap Forest Green</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+      </div>
+
+      <!-- Hidden Products (Products 5-10) -->
+      <div class="hidden-products grid grid-cols-2 gap-[12px] mt-4" id="hidden-products">
+        <!-- Mobile Product 5 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=400&h=400&fit=crop" 
+              alt="Vintage car"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&h=400&fit=crop" 
+              alt="Car alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Rest In Nature T-Shirt Charcoal</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 6 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop" 
+              alt="Watch on white background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop" 
+              alt="Watch alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-2 right-2 bg-[#5c7962] border border-black text-[#fffffa] text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Classic Watch Silver Edition</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 7 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop" 
+              alt="Camera on yellow background"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop" 
+              alt="Camera alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Vintage Camera Polaroid Style</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 8 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop" 
+              alt="Leather bag"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop" 
+              alt="Bag alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-gray-900 text-white text-[8px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">Best Seller</span>
+          </div>
+          <h3 class="font-condensed text-[10px] font-bold uppercase tracking-wide text-gray-900 mb-1 leading-tight">Leather Backpack Brown Classic</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-yellow-400">
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-3 h-3 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[10px] text-gray-500">1,234 Reviews</span>
+          </div>
+          <p class="text-sm font-bold text-gray-900">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 9 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-lg overflow-hidden mb-2 bg-gray-100">
+            <img 
+              src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=400&fit=crop" 
+              alt="Perfume bottle"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=400&fit=crop" 
+              alt="Perfume alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+            <span class="absolute top-2 right-2 bg-[#5c7962] border border-black text-[#fffffa] text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              SAVE 15%
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">Premium Fragrance Collection</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+
+        <!-- Mobile Product 10 -->
+        <article class="product-card">
+          <div class="relative aspect-square rounded-[10px] overflow-hidden mb-3 bg-gray-100 p-1">
+            <img 
+              src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400&h=400&fit=crop" 
+              alt="Sneakers white"
+              class="product-image primary-image absolute inset-0 w-full h-full object-cover"
+            >
+            <img 
+              src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop" 
+              alt="Sneakers alternate view"
+              class="product-image secondary-image absolute inset-0 w-full h-full object-cover opacity-0"
+            >
+            <span class="absolute top-2 left-2 bg-white border border-black text-black text-[8px] font-condensed tracking-[0.32px] px-2 py-0.5 rounded-full">
+              BEST SELLER
+            </span>
+          </div>
+          <h3 class="font-condensed text-[16px] tracking-[0.48px] text-[#1c1d1d] uppercase mb-1 leading-tight">White Canvas Sneakers Classic</h3>
+          <div class="flex items-center gap-1 mb-1">
+            <div class="flex text-[#231f20]">
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+              <svg class="w-[9px] h-[9px] fill-current text-gray-300" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+            </div>
+            <span class="text-[11px] text-[#707070]">1,234 Reviews</span>
+          </div>
+          <p class="font-body font-medium text-[16px] uppercase text-[#1c1d1d]">$104.95</p>
+        </article>
+      </div>
+
+      <!-- Show More Button -->
+      <button 
+        id="show-more-btn" 
+        class="w-full mt-6 bg-[#1c1d1d] text-[#fffffa] py-4 rounded-full text-[16px] font-semibold tracking-[0.48px] hover:bg-black transition-colors"
+      >
+        Show More
+      </button>
+    </div>
+  </section>
+
+  <script>
+    // Show More Button Toggle
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const hiddenProducts = document.getElementById('hidden-products');
+    let isExpanded = false;
+
+    showMoreBtn.addEventListener('click', function() {
+      isExpanded = !isExpanded;
+      
+      if (isExpanded) {
+        hiddenProducts.classList.add('expanded');
+        showMoreBtn.textContent = 'Show Less';
+      } else {
+        hiddenProducts.classList.remove('expanded');
+        showMoreBtn.textContent = 'Show More';
+      }
+    });
+
+    // Image Hover Swap - using event delegation for better performance
+    document.addEventListener('mouseenter', function(e) {
+      const card = e.target.closest('.product-card');
+      if (card) {
+        const primaryImg = card.querySelector('.primary-image');
+        const secondaryImg = card.querySelector('.secondary-image');
+        if (primaryImg && secondaryImg) {
+          primaryImg.style.opacity = '0';
+          secondaryImg.style.opacity = '1';
+        }
+      }
+    }, true);
+
+    document.addEventListener('mouseleave', function(e) {
+      const card = e.target.closest('.product-card');
+      if (card) {
+        const primaryImg = card.querySelector('.primary-image');
+        const secondaryImg = card.querySelector('.secondary-image');
+        if (primaryImg && secondaryImg) {
+          primaryImg.style.opacity = '1';
+          secondaryImg.style.opacity = '0';
+        }
+      }
+    }, true);
+  </script>
+</body>
+</html>
