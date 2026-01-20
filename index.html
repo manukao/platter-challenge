@@ -29,7 +29,6 @@
     /* Custom scrollbar styling */
     .product-carousel::-webkit-scrollbar {
       height: 4px;
-      transition: height 0.2s ease;
     }
     
     .product-carousel::-webkit-scrollbar-track {
@@ -52,8 +51,8 @@
 
     /* Firefox scrollbar */
     .product-carousel {
-      scrollbar-width: thin;
-      scrollbar-color: #231f20 #ddd6d7;
+      display: block;
+      overflow: auto;
     }
 
     /* Product image hover transition */
